@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         //background
         getWindow().setBackgroundDrawableResource(R.mipmap.city_background_4267x2133);
 
+
         //set it to full screen
         setFullscreen();
         setContentView();
@@ -77,11 +79,19 @@ public class MainActivity extends AppCompatActivity {
                     contentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     screenWidth = contentView.getWidth();
                     screenHeight = contentView.getHeight();
+                    new Slider(MainActivity.this,contentView,screenHeight,screenWidth).play();
+                    findViewById(R.id.initial_screen).bringToFront();
+                    findViewById(R.id.top_slide).bringToFront();
+                    findViewById(R.id.bottom_slide).bringToFront();
+                    findViewById(R.id.logo).bringToFront();
                 }
             });
         }
 
         //sets up variables
+        DisplayMetrics metrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
         setUpGameEnvironment();
 
         //plays music
